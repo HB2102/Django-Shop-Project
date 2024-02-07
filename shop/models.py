@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 import datetime
 
 
@@ -27,6 +28,9 @@ class Product(models.Model):
     price = models.DecimalField(default=0, decimal_places=0, max_digits=15)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     picture = models.ImageField(upload_to='upload/product/')
+    in_sale = models.BooleanField(default=False)
+    sale_price = models.DecimalField(default=0, decimal_places=0, max_digits=15)
+    rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
 
 
     def __str__(self):

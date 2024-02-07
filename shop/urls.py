@@ -1,6 +1,6 @@
 from django.urls import path, include
-from .views import hellowold
+from .views import helloworld
 
 urlpatterns = [
-    path('', hellowold)
+    path('', helloworld)
 ]

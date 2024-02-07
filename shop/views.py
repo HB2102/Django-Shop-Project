@@ -1,6 +1,11 @@
 from django.shortcuts import render, HttpResponse
+from .models import Product
 
 
-def hellowold(request):
-    return render(request, 'index.html')
+def helloworld(request):
+    all_products = Product.objects.all()
+
+
+
+    return render(request, 'index.html', {'products': all_products})
 
