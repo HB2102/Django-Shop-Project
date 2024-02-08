@@ -47,4 +47,4 @@ class Order(models.Model):
     status = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.customer} , {self.phone}, {self.status}'
+        return self.product

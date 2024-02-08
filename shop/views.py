@@ -64,3 +64,8 @@ def signup_user(request):
         form = SignupForm()
 
     return render(request, 'signup.html', {'form': form})
+
+
+def product(request, pk):
+    product = Product.objects.filter(id=pk).first()
+    return render(request, 'product.html', {'product': product})
