@@ -20,10 +20,34 @@
                       {% else %}
                       price: {{ product.price | intcomma  }} 💲
                       {% endif %}
+                      <br><br>
+                      <button class="btn btn-primary" type="button" value="{{ product.id }}" id="add-cart">Add to Cart</button>
                   </div>
                 </div>
               </div>
             </div>
         </div>
         <br><br>
+
+<script>
+    $(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url 'cart_add' %}',
+        data:{
+            product_id: $('#add-cart').val(),
+            csrfmiddlewaretoken: '{{ csrf_token}}',
+            action: 'post'
+        },
+
+        success: function(json){
+            console.log(json)
+        },
+
+        error: function(xhr, errmsg, err){
+        },
+    })
+    })
+</script>
 {% endblock %}
