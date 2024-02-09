@@ -21,6 +21,14 @@
                       price: {{ product.price | intcomma  }} 💲
                       {% endif %}
                       <br><br>
+                        number: <br>
+                        <select class="form-select" id="cart-quantity" name="cart-quantity">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </select>
+                      <br>
                       <button class="btn btn-primary" type="button" value="{{ product.id }}" id="add-cart">Add to Cart</button>
                   </div>
                 </div>
@@ -37,15 +45,18 @@
         url: '{% url 'cart_add' %}',
         data:{
             product_id: $('#add-cart').val(),
-            csrfmiddlewaretoken: '{{ csrf_token}}',
+            product_quantity: $(".form-select option:selected").html(),
+            csrfmiddlewaretoken: '{{ csrf_token }}',
             action: 'post'
         },
 
         success: function(json){
             console.log(json)
+            document.getElementById('cart-quantity').textContent = json.quantity
         },
 
         error: function(xhr, errmsg, err){
+         console.error("Error in AJAX call:", errmsg); // Debugging line
         },
     })
     })
